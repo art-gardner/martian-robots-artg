@@ -1,7 +1,11 @@
 import direction.Direction;
 import direction.DirectionImpl;
 
+import java.util.ArrayList;
+
 public class Robot {
+
+    private static ArrayList<Scent> scents = new ArrayList<>();
 
     int x;
     int y;
@@ -26,22 +30,23 @@ public class Robot {
              switch (instruction) {
                  case 'L' -> {
                      this.direction = this.direction.left();
-                     break;
                  }
                  case 'R' -> {
                      this.direction = this.direction.right();
-                     break;
                  }
                  case 'F' -> {
-                     int[] movement = this.direction.forwards();
-                     int newx = this.x + movement[0];
-                     int newy = this.y + movement[1];
+                     if (scents.stream().noneMatch(s -> s.pickUpScent(this.x, this.y, this.direction))) {
+                         int[] movement = this.direction.forwards();
+                         int newx = this.x + movement[0];
+                         int newy = this.y + movement[1];
 
-                     if (limit.isXInBounds(newx) && limit.isYInBounds(newy)) {
+                         if (!(limit.isXInBounds(newx) && limit.isYInBounds(newy))) {
+                             scents.add(new Scent(this.x, this.y, this.direction));
+                             return this.x + "\s" + this.y + "\s" + direction.getLetter() + "\sLOST";
+                         }
+
                          this.x = newx;
                          this.y = newy;
-                     } else {
-                         return this.x + "\s" + this.y + "\s" + direction.getLetter() + "\sLOST";
                      }
                  }
              }

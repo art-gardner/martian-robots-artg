@@ -12,10 +12,10 @@ public class Limit {
     }
 
     public boolean isXInBounds(int x) {
-        return x > 0 && x < xlimit;
+        return x >= 0 && x <= xlimit;
     }
 
     public boolean isYInBounds(int y) {
-        return y > 0 && y < ylimit;
+        return y >= 0 && y <= ylimit;
     }
 }

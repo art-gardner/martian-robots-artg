@@ -2,7 +2,7 @@ package direction;
 
 public enum DirectionImpl implements Direction {
 
-    NORTH('N', new int[]{1, 0}){
+    NORTH('N', new int[]{0, 1}){
         @Override
         public Direction left() {
             return WEST;
@@ -12,7 +12,7 @@ public enum DirectionImpl implements Direction {
         public Direction right() {
             return EAST;
         }
-    }, EAST('E', new int[]{0, 1}) {
+    }, EAST('E', new int[]{1, 0}) {
         @Override
         public Direction left() {
             return NORTH;
@@ -23,7 +23,7 @@ public enum DirectionImpl implements Direction {
             return SOUTH;
         }
 
-    }, SOUTH('S', new int[]{-1, 0}) {
+    }, SOUTH('S', new int[]{0, -1}) {
         @Override
         public Direction left() {
             return EAST;
@@ -33,7 +33,7 @@ public enum DirectionImpl implements Direction {
         public Direction right() {
             return WEST;
         }
-    }, WEST('W', new int[]{0, -1}) {
+    }, WEST('W', new int[]{-1, 0}) {
         @Override
         public Direction left() {
             return SOUTH;
